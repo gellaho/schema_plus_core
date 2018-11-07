@@ -76,7 +76,7 @@ module SchemaPlus
                   (?<options>.*)
                 $
                 }x
-                if !m.nil?
+                if !m.nil? && !m[:options].match?(/lower/)
                   SchemaDump::Table::Column.new name: m[:name], type: m[:type], options: eval("{" + m[:options] + "}"), comments: []
                 else
                   m = cs.match %r{
